@@ -337,6 +337,20 @@ body {
   border-radius: 10px;
   padding: 1rem 1.25rem;
 }
+
+/* Reverse numbering: last item is 1, first item has the highest number */
+.pub-list { counter-reset: pub var(--pub-start, 1); }
+.pub-list > li { counter-increment: pub -1; }
+.pub-list > li::before {
+  content: counter(pub);
+  flex: 0 0 auto;
+  min-width: 1.6rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-2);
+}
+
 .pub-text { color: var(--text-dim); font-size: 0.92rem; flex: 1; }
 .pub-text em { color: var(--text); font-style: italic; }
 .pub-link {
@@ -347,6 +361,44 @@ body {
   white-space: nowrap;
 }
 .pub-link:hover { text-decoration: underline; }
+
+/* BibTeX copy icon (sits inline after the citation text) */
+.bib-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  width: 24px;
+  height: 24px;
+  margin-left: 0.45rem;
+  padding: 0;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.bib-btn svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+.bib-btn .ic-check { display: none; }
+.bib-btn:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.bib-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.bib-btn.copied {
+  color: var(--accent-2);
+  border-color: var(--accent-2);
+}
+.bib-btn.copied .ic-copy { display: none; }
+.bib-btn.copied .ic-check { display: block; }
 
 .journal-link {
   color: inherit;
